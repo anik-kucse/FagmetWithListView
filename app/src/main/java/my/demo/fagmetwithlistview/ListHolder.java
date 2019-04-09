@@ -1,5 +1,6 @@
 package my.demo.fagmetwithlistview;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -24,6 +26,7 @@ public class ListHolder extends Fragment {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,19 +39,19 @@ public class ListHolder extends Fragment {
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        AsyncTask.execute(new Runnable() {
+        new AsyncTask<Void, Void, Void>(){
             @Override
-            public void run() {
+            protected Void doInBackground(Void... voids) {
                 customAdapter.addUser(userRoomDatabase.userDao().getAllUser());
+                return null;
             }
-        });
 
-        AsyncTask.execute(new Runnable() {
             @Override
-            public void run() {
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
                 customAdapter.notifyDataSetChanged();
             }
-        });
+        }.execute();
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
 
@@ -59,6 +62,9 @@ public class ListHolder extends Fragment {
                 dialog.setTitle("Add New User");
                 dialog.setContentView(R.layout.new_user);
                 dialog.show();
+
+                Window window = dialog.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 final EditText dia_name = dialog.findViewById(R.id.textViewDialogName);
                 final EditText dia_age = dialog.findViewById(R.id.textViewDialogAge);
