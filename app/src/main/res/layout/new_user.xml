@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/textViewDialogName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:hint="Name"
+        android:inputType="textAutoComplete"
+        android:textColor="#999595"
+        android:textSize="20sp"
+        android:padding="15dp"
+        />
+    <EditText
+        android:id="@+id/textViewDialogAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:hint="Age"
+        android:inputType="number"
+        android:textColor="#999595"
+        android:textSize="20sp"
+        android:padding="15dp"
+        />
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        />
+
+</LinearLayout>
